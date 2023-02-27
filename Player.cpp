@@ -22,28 +22,24 @@ void Player::update()
 	{
 		this->velocity.x = 0.0f;
 		this->velocity.y = -this->speed;
-		this->horizontalMove = false;
 	}
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S) && this->velocity.y == 0)
 	{
 		this->velocity.x = 0.0f;
 		this->velocity.y = this->speed;
-		this->horizontalMove = false;
 	}
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D) && this->velocity.x == 0)
 	{
 		this->velocity.x = this->speed;
 		this->velocity.y = 0.0f;
-		this->horizontalMove = true;
 	}
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A) && this->velocity.x == 0)
 	{
 		this->velocity.x = -this->speed;
 		this->velocity.y = 0.0f;
-		this->horizontalMove = true;
 	}
 }
 
@@ -100,7 +96,7 @@ void Player::tailUpdate(Player &block)
 	{
 		if (block.getVelocity().x == 0)
 		{
-			if (this->left() <= block.left() + 0.1 && this->left() >= block.left() - 0.1 || this->right() <= block.right() + 0.1 && this->right() >= block.right() - 0.1)
+			if (this->left() <= block.left() + 0.05 && this->left() >= block.left() - 0.05 || this->right() <= block.right() + 0.05 && this->right() >= block.right() - 0.05)
 			{
 				if (block.getVelocity().y < 0)
 				{
@@ -118,7 +114,7 @@ void Player::tailUpdate(Player &block)
 
 		if (block.getVelocity().x != 0)
 		{
-			if (this->top() <= block.top() + 0.1 && this->top() >= block.top() - 0.1 || this->bottom() <= block.bottom() + 0.1 && this->bottom() >= block.bottom() - 0.1)
+			if (this->top() <= block.top() + 0.05 && this->top() >= block.top() - 0.05 || this->bottom() <= block.bottom() + 0.05 && this->bottom() >= block.bottom() - 0.05)
 			{
 				if (block.getVelocity().x < 0)
 				{

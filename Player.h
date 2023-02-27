@@ -19,10 +19,9 @@ public:
 	void tailUpdate(Player &block);
 
 private:
-	bool horizontalMove;
 	sf::RectangleShape shape;
 	sf::Vector2f velocity{ 0.0f, 0.0f };
-	sf::Vector2f begginingSize{ 20.0, 20.0 };
+	sf::Vector2f begginingSize{ 10.0, 10.0 };
 	float speed{ 0.05f };
 };
 
