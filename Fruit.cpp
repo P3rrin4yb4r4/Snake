@@ -4,7 +4,9 @@ Fruit::Fruit()
 {
 	shape.setSize(size);
 	shape.setFillColor(sf::Color::Red);
-	shape.setPosition((this->x)*390, (this->y)*390);
+	shape.setPosition((this->x)*370+10, (this->y)*370+10);
+	shape.setOutlineColor(sf::Color::Black);
+	shape.setOutlineThickness(1.0f);
 }
 
 void Fruit::draw(sf::RenderTarget& target, sf::RenderStates state) const
@@ -35,5 +37,5 @@ float Fruit::right()
 
 void Fruit::changePosition()
 {
-	shape.setPosition(((float)(rand()) / (float)(RAND_MAX))*390, ((float)(rand()) / (float)(RAND_MAX)) * 390);
+	shape.setPosition(((float)(rand()) / (float)(RAND_MAX))*370+10, ((float)(rand()) / (float)(RAND_MAX)) * 370+10);
 }

@@ -3,19 +3,34 @@
 #include "Fruit.h"
 #include <vector>
 #include <iostream>
-#include <random>
 #include <cstdlib>
 #include <ctime>
 
-bool isIntersecting(Player pl, Fruit fr)
+clock_t endwait;
+
+template <class T1, class T2>
+bool isIntersecting(T1& pl, T2& fr)
 {
-    return pl.top() <= fr.bottom() && pl.bottom() >= fr.top() && pl.left() <= fr.right() && pl.right() >= fr.left();
+    return pl.top()+0.5 <= fr.bottom()-0.5 && pl.bottom()-0.5 >= fr.top()+0.5 && pl.left()+0.5 <= fr.right()-0.5 && pl.right()-0.5 >= fr.left()+0.5;
 }
 
 int main()
 {
     srand((unsigned int)time(NULL));
     sf::RenderWindow window(sf::VideoMode(400, 400), "Snake");
+
+    sf::Texture texture;
+    texture.loadFromFile("C:/Users/lukla/Pictures/grass.jpg");
+
+    sf::Sprite background;
+    background.setTexture(texture);
+    
+    sf::RectangleShape frame;
+    frame.setSize(sf::Vector2f(380.0f, 380.0f));
+    frame.setPosition(sf::Vector2f(10.0f, 10.0f));
+    frame.setFillColor(sf::Color::Transparent);
+    frame.setOutlineThickness(10.0f);
+    frame.setOutlineColor(sf::Color::Yellow);
 
     Fruit fruit;
 
@@ -57,7 +72,16 @@ int main()
             x++;
         }
 
+        //if (blocks.size() > 1)
+        //{
+        //    if (isIntersecting(blocks[0], blocks[1]))
+        //        blocks[0].delayActivation();
+        //}
+
         window.clear(sf::Color::White);
+
+        window.draw(background);
+        window.draw(frame);
 
         for (auto block : blocks)
         {
@@ -73,6 +97,10 @@ int main()
             {
                 blocks[i].tailUpdate(blocks[(i-1)]);
             }
+        }
+        if (blocks[0].delayStatus() == true)
+        {
+            if (clock() >= blocks[0].startDelayStatus(0.21)) { blocks[0].delayActivation(); }
         }
         window.display();
     }

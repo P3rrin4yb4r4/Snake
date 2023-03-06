@@ -18,28 +18,43 @@ void Player::update()
 {
 	shape.move(this->velocity);
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W) && this->velocity.y == 0)
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W) && this->velocity.y == 0 && this->delay==0)
 	{
 		this->velocity.x = 0.0f;
 		this->velocity.y = -this->speed;
+		this->delay = true;
+		this->startDelay = clock();
 	}
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S) && this->velocity.y == 0)
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S) && this->velocity.y == 0 && this->delay==0)
 	{
 		this->velocity.x = 0.0f;
 		this->velocity.y = this->speed;
+		this->delay = true;
+		this->startDelay = clock();
 	}
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D) && this->velocity.x == 0)
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D) && this->velocity.x == 0 && this->delay==0)
 	{
 		this->velocity.x = this->speed;
 		this->velocity.y = 0.0f;
+		this->delay = true;
+		this->startDelay = clock();
 	}
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A) && this->velocity.x == 0)
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A) && this->velocity.x == 0 && this->delay==0)
 	{
 		this->velocity.x = -this->speed;
 		this->velocity.y = 0.0f;
+		this->delay = true;
+		this->startDelay = clock();
+	}
+
+	if (this->bottom() >= 390 || this->top() <= 10 || this->left() <= 10 || this->right() >= 390)
+	{
+		this->velocity.x = 0;
+		this->velocity.y = 0;
+		this->stop = true;
 	}
 }
 
@@ -130,4 +145,25 @@ void Player::tailUpdate(Player &block)
 			}
 		}
 	}
+
+	if (this->stop)
+	{
+		this->velocity.x = 0.0f;
+		this->velocity.y = 0.0f;
+	}
+}
+
+bool Player::delayStatus()
+{
+	return this->delay;
+}
+
+void Player::delayActivation()
+{
+	this->delay = false;
+}
+
+time_t Player::startDelayStatus(float seconds)
+{
+	return this->startDelay + seconds * CLOCKS_PER_SEC;
 }
