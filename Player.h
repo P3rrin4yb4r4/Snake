@@ -1,5 +1,6 @@
+#ifndef PLAYER_H
+#define PLAYER_H
 #include<SFML/Graphics.hpp>
-#include<Windows.h>
 #include<ctime>
 
 class Player : public sf::Drawable
@@ -33,3 +34,4 @@ private:
 	time_t startDelay;
 };
 
+#endif

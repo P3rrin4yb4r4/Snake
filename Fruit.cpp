@@ -1,3 +1,5 @@
+#ifndef FRUIT_CPP
+#define FRUIT_CPP
 #include "Fruit.h"
 
 Fruit::Fruit()
@@ -39,3 +41,5 @@ void Fruit::changePosition()
 {
 	shape.setPosition(((float)(rand()) / (float)(RAND_MAX))*370+10, ((float)(rand()) / (float)(RAND_MAX)) * 370+10);
 }
+
+#endif

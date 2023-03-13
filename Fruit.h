@@ -1,6 +1,6 @@
-#pragma once
+#ifndef FRUIT_H
+#define FRUIT_H
 #include <SFML/Graphics.hpp>
-#include <cstdlib>
 
 class Fruit : public sf::Drawable
 {
@@ -20,3 +20,4 @@ private:
 	float y = (float)(rand()) / (float)(RAND_MAX);
 };
 
+#endif

@@ -1,3 +1,5 @@
+#ifndef PLAYER_CPP
+#define PLAYER_CPP
 #include "Player.h"
 
 Player::Player(float startPos_x, float startPos_y)
@@ -167,3 +169,5 @@ time_t Player::startDelayStatus(float seconds)
 {
 	return this->startDelay + seconds * CLOCKS_PER_SEC;
 }
+
+#endif
